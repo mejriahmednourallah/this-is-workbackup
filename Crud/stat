@@ -1,0 +1,34 @@
+
+
+int ETSparregion( char temp[] , char etablissement[],  char reg[]) {
+    FILE *file, *tempFile;
+    ets current_ets;
+
+    int nbr = 0;
+
+    file = fopen("etablissement.txt", "r");
+    tempFile = fopen("temp.txt", "w");
+
+    if (file == NULL || tempFile == NULL) 
+	{
+
+        printf("Error opening file!\n");
+        return -1;
+    }
+
+    while (fscanf(file, "%s %s %s %s %d", current_ets.nom_ets, current_ets.id_ets,
+                  current_ets.administrateur_ets, current_ets.region_ets, &current_ets.capacite_ets) == 5) {
+
+        				if (strcmp(current_ets.region_ets, reg) == 0) {
+            				fprintf(tempFile, "%s %s %s %s %d\n", current_ets.nom_ets, current_ets.id_ets,
+                   		 	current_ets.administrateur_ets, current_ets.region_ets, current_ets.capacite_ets);
+           				nbr++;
+     }
+    }
+
+    fclose(file);
+    fclose(tempFile);
+
+    return nbr;
+}
+

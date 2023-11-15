@@ -1,0 +1,36 @@
+void insertion(ets arr[], int n) {
+    int i, j;
+    ets key;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j].capacite_ets > key.capacite_ets) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+void ETSTrieCapacite(char name[]) {
+    FILE *file = fopen("etbalissment.txt", "r");
+    if (file == NULL) {
+        return;
+    }
+ets etsArray[100];
+int numETS = 0;
+ while (fscanf(file, "%s %s %s %s %d", etsArray[numETS].nom_ets, etsArray[numETS].id_ets,
+                  etsArray[numETS].administrateur_ets, etsArray[numETS].region_ets, &etsArray[numETS].capacite_ets) == 5) {
+        numETS++;
+    }
+ fclose(file);
+insertion(etsArray, numETS);
+ FILE *temp= fopen("sorted_ets.txt", "a+");
+ for (int i = 0; i < numETS; i++)
+{	
+	fprintf(outputFile, "%s %s %s %s %d\n", etsArray[i].nom_ets, etsArray[i].id_ets,
+                etsArray[i].administrateur_ets, etsArray[i].region_ets, etsArray[i].capacite_ets);
+    }
+
+}
+
